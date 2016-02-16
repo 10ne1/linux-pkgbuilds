@@ -19,7 +19,7 @@ source=('git+file:///media/adi/ssd/linux#branch=linux-4.4.y'
         "${pkgbase}.preset")
 sha256sums=('SKIP'
             'd402c67f5a7334ac9e242344055ef4ac63fe43a1d8f1cda82eddd59d7242a63e'
-            '454e962fbb638ca0ac633a3d2f38ae69abbb8a8b0c0b4f7cff032c34fa066295'
+            'ec09b6507309f310b0ed4f257494f0eee99fc5f88147c3087b36ad847a61640d'
             '95fcfdfcb9d540d1a1428ce61e493ddf2c2a8ec96c8573deeadbb4ee407508c7')
 
 _kernelname=${pkgbase#linux}
