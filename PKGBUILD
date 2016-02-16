@@ -64,7 +64,7 @@ prepare() {
 build() {
   cd "${_srcname}"
 
-  make ${MAKEFLAGS} LOCALVERSION= bzImage modules
+  make ${MAKEFLAGS} -j8 LOCALVERSION= bzImage modules
 }
 
 _package() {
