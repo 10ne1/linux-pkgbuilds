@@ -1,2 +1,2 @@
 clean:
-	rm -rf linux-git-* pkg/ linux.install.pkg
+	rm -rf linux-rt-* linux-master-* linux-stable-* pkg/ linux.install.pkg
