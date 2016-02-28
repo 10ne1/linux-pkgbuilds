@@ -14,9 +14,7 @@ makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
 source=('git+file:///media/adi/ssd/linux#branch=linux-4.4.y'
         # the main kernel config files
-        'config' 'config.x86_64'
-        # standard config files for mkinitcpio ramdisk
-        "${pkgbase}.preset")
+        'config' 'config.x86_64')
 sha256sums=('SKIP'
             'd402c67f5a7334ac9e242344055ef4ac63fe43a1d8f1cda82eddd59d7242a63e'
             'ec09b6507309f310b0ed4f257494f0eee99fc5f88147c3087b36ad847a61640d'
@@ -69,12 +67,11 @@ build() {
 
 _package() {
   pkgdesc="The Linux kernel and modules (git version)"
-  depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
+  depends=('coreutils' 'linux-firmware' 'kmod')
   optdepends=('crda: to set the correct wireless channels of your country')
   provides=("kernel26${_kernelname}=${pkgver}")
   conflicts=("kernel26${_kernelname}")
   replaces=("kernel26${_kernelname}")
-  backup=("etc/mkinitcpio.d/${pkgbase}.preset")
   install=linux.install
 
   cd "${_srcname}"
@@ -97,15 +94,6 @@ _package() {
     -e  "s/KERNEL_NAME=.*/KERNEL_NAME=${_kernelname}/" \
     -e  "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_kernver}/" \
     -i "${startdir}/${install}"
-
-  # install mkinitcpio preset file for kernel
-  install -D -m644 "${srcdir}/${pkgbase}.preset" "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
-  sed \
-    -e "1s|'linux.*'|'${pkgbase}'|" \
-    -e "s|ALL_kver=.*|ALL_kver=\"/boot/vmlinuz-${pkgbase}\"|" \
-    -e "s|default_image=.*|default_image=\"/boot/initramfs-${pkgbase}.img\"|" \
-    -e "s|fallback_image=.*|fallback_image=\"/boot/initramfs-${pkgbase}-fallback.img\"|" \
-    -i "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
 
   # remove build and source links
   rm -f "${pkgdir}"/lib/modules/${_kernver}/{source,build}
