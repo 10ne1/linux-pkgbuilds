@@ -4,10 +4,12 @@
 KERNEL_NAME=
 KERNEL_VERSION=
 
-post_install () {
-  # updating module dependencies
+post_install() {
   echo ">>> Updating module dependencies. Please wait ..."
   depmod ${KERNEL_VERSION}
+
+  echo ">>> Updating bootloader config. Please Wait ..."
+  grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 post_upgrade() {
@@ -15,7 +17,14 @@ post_upgrade() {
     echo "WARNING: /boot appears to be a separate partition but is not mounted."
   fi
 
-  # updating module dependencies
   echo ">>> Updating module dependencies. Please wait ..."
   depmod ${KERNEL_VERSION}
+
+  echo ">>> Updating bootloader config. Please Wait ..."
+  grub-mkconfig -o /boot/grub/grub.cfg 
+}
+
+post_remove() {
+  echo ">>> Updating bootloader config. Please Wait ..."
+  grub-mkconfig -o /boot/grub/grub.cfg 
 }
