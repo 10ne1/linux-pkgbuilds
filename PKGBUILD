@@ -3,22 +3,21 @@
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 # Contributor: Jonathan Chan <jyc@fastmail.fm>
 
-pkgbase=linux-git
+pkgbase=linux-stable
 _srcname=linux
-pkgver=4.4.1.r0.gf1ab5ea
+pkgver=4.6.r0.g2dcd0af
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git+file:///media/adi/ssd/linux#branch=linux-4.4.y'
+source=('git+file:///home/adi/workspace/linux#branch=stable-linux-4.6.y'
         # the main kernel config files
         'config' 'config.x86_64')
 sha256sums=('SKIP'
             'd402c67f5a7334ac9e242344055ef4ac63fe43a1d8f1cda82eddd59d7242a63e'
-            'ec09b6507309f310b0ed4f257494f0eee99fc5f88147c3087b36ad847a61640d'
-            '95fcfdfcb9d540d1a1428ce61e493ddf2c2a8ec96c8573deeadbb4ee407508c7')
+            '3799bf898dcf0b9eaaa9edc5825ae86921017012b2efb622b84d73d1f71f5784')
 
 _kernelname=${pkgbase#linux}
 
