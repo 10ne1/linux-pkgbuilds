@@ -1,18 +1,22 @@
-# Maintainer: Ioan-Adrian Ratiu <adi at adirat dot com>
+# Maintainer: Boohbah <boohbah at gmail.com>
+# Contributor: Tobias Powalowski <tpowa@archlinux.org>
+# Contributor: Thomas Baechler <thomas@archlinux.org>
+# Contributor: Jonathan Chan <jyc@fastmail.fm>
 
-pkgbase=linux-rt
+pkgbase=linux-mainline
 _srcname=linux
-pkgver=4.6.7.rt11.r0.ga983ae3
+pkgver=4.8rc7.r214.gd0a6625
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git+file:///home/adi/workspace/linux#branch=linux-4.6.y-rt'
-        'config.x86_64.rt')
+source=('git+file:///home/adi/workspace/linux#branch=master'
+        # the main kernel config files
+        'config.x86_64.mainline')
 sha256sums=('SKIP'
-            '4ad5bfacfe39f07c689fad0f447d3fd21c9b549db4846d14901a0495037c5827')
+            'a7572debb48eb5988b18cd4a0c43a5d9cec102c965e26a8b0b12f0b703e29109')
 
 _kernelname=${pkgbase#linux}
 
@@ -25,11 +29,7 @@ pkgver() {
 prepare() {
   cd "${_srcname}"
 
-  if [ "${CARCH}" = "x86_64" ]; then
-    cat "${srcdir}/config.x86_64.rt" > ./.config
-  else
-    cat "${srcdir}/config" > ./.config
-  fi
+  cat "${srcdir}/config.x86_64.mainline" > ./.config
 
   # set localversion to git commit
   sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"-${pkgver##*.}\"|g" ./.config

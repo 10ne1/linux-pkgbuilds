@@ -3,21 +3,20 @@
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 # Contributor: Jonathan Chan <jyc@fastmail.fm>
 
-pkgbase=linux-stable
+pkgbase=linux-next
 _srcname=linux
-pkgver=4.6.r0.g2dcd0af
+pkgver=next.20160815.r1.g4c79591
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git+file:///home/adi/workspace/linux#branch=stable-linux-4.6.y'
+source=('git+file:///home/adi/workspace/linux#branch=next'
         # the main kernel config files
-        'config' 'config.x86_64')
+        'config.x86_64.next')
 sha256sums=('SKIP'
-            'd402c67f5a7334ac9e242344055ef4ac63fe43a1d8f1cda82eddd59d7242a63e'
-            '3799bf898dcf0b9eaaa9edc5825ae86921017012b2efb622b84d73d1f71f5784')
+            '2dddf4e099a6f1a5d0e02231d54a0095b8e9af36a7b9bd974ad54258548b1f07')
 
 _kernelname=${pkgbase#linux}
 
@@ -30,11 +29,7 @@ pkgver() {
 prepare() {
   cd "${_srcname}"
 
-  if [ "${CARCH}" = "x86_64" ]; then
-    cat "${srcdir}/config.x86_64" > ./.config
-  else
-    cat "${srcdir}/config" > ./.config
-  fi
+  cat "${srcdir}/config.x86_64.next" > ./.config
 
   # set localversion to git commit
   sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"-${pkgver##*.}\"|g" ./.config
@@ -181,10 +176,6 @@ _package-headers() {
   # http://bugs.archlinux.org/task/9912
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-core"
   cp drivers/media/dvb-core/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-core/"
-  # and...
-  # http://bugs.archlinux.org/task/11194
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
-  cp include/config/dvb/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
 
   # add dvb headers for http://mcentral.de/hg/~mrec/em28xx-new
   # in reference to:
