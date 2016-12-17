@@ -16,7 +16,7 @@ source=('git+file:///home/adi/workspace/linux#branch=master'
         # the main kernel config files
         'config.x86_64.mainline')
 sha256sums=('SKIP'
-            '99928b390892305c22248b026f1c69c053b9051f753db5bd9b3f4a63ca548fad')
+            'be64d4e72c8279d89173c450ba44a0b6709e5abc706361d655bf0cae54ed347a')
 
 _kernelname=${pkgbase#linux}
 
