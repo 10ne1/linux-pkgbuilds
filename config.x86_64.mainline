@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.10.0-rc1 Kernel Configuration
+# Linux/x86 4.10.0-rc2 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -2987,7 +2987,8 @@ CONFIG_FANOTIFY=y
 # CONFIG_QUOTA is not set
 # CONFIG_QUOTACTL is not set
 CONFIG_AUTOFS4_FS=m
-# CONFIG_FUSE_FS is not set
+CONFIG_FUSE_FS=y
+# CONFIG_CUSE is not set
 # CONFIG_OVERLAY_FS is not set
 
 #
