@@ -5,7 +5,7 @@
 
 pkgbase=linux-mainline
 _srcname=linux
-pkgver=4.10rc2.r272.g87bc610730a9
+pkgver=4.10.r10320.ge5d56efc97f8
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -16,7 +16,7 @@ source=('git+file:///home/adi/workspace/linux#branch=master'
         # the main kernel config files
         'config.x86_64.mainline')
 sha256sums=('SKIP'
-            'b49447ffb3c6c31461a75fe0e8f3c03c9bf2388275860e747e3f2457e309b669')
+            'e173248c0850db8b42321214d3bea883389a63ef46aece4f54486a0c7b09fc39')
 
 _kernelname=${pkgbase#linux}
 
