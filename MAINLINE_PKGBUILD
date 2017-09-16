@@ -5,7 +5,7 @@
 
 pkgbase=linux-mainline
 _srcname=linux
-pkgver=4.10.r10320.ge5d56efc97f8
+pkgver=4.13.r12049.gb38923a068c1
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -16,7 +16,7 @@ source=('git+file:///home/adi/workspace/linux#branch=master'
         # the main kernel config files
         'config.x86_64.mainline')
 sha256sums=('SKIP'
-            'e173248c0850db8b42321214d3bea883389a63ef46aece4f54486a0c7b09fc39')
+            '580adc25f786ff9717ac9d7a53714d61ece0853d3c8d071e9960bcfbf2e6bec4')
 
 _kernelname=${pkgbase#linux}
 
@@ -241,9 +241,6 @@ _package-docs() {
   cp -al Documentation "${pkgdir}/usr/lib/modules/${_kernver}/build"
   find "${pkgdir}" -type f -exec chmod 444 {} \;
   find "${pkgdir}" -type d -exec chmod 755 {} \;
-
-  # remove a file already in linux package
-  rm -f "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
 }
 
 pkgname=("${pkgbase}" "${pkgbase}-headers" "${pkgbase}-docs")

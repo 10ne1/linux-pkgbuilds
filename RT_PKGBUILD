@@ -2,17 +2,17 @@
 
 pkgbase=linux-rt
 _srcname=linux
-pkgver=4.6.7.rt11.r0.ga983ae3
+pkgver=4.11.12.rt13.rebase.r0.g48bf63387749
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git+file:///home/adi/workspace/linux#branch=linux-4.6.y-rt'
+source=('git+file:///home/adi/workspace/linux#branch=linux-4.11.y-rt-rebase'
         'config.x86_64.rt')
 sha256sums=('SKIP'
-            '4ad5bfacfe39f07c689fad0f447d3fd21c9b549db4846d14901a0495037c5827')
+            '6ca994122c4e8c64a6966b7b3931a94c98f43d4573b3193bc65875a0271cc4fd')
 
 _kernelname=${pkgbase#linux}
 
@@ -25,11 +25,7 @@ pkgver() {
 prepare() {
   cd "${_srcname}"
 
-  if [ "${CARCH}" = "x86_64" ]; then
-    cat "${srcdir}/config.x86_64.rt" > ./.config
-  else
-    cat "${srcdir}/config" > ./.config
-  fi
+  cat "${srcdir}/config.x86_64.rt" > ./.config
 
   # set localversion to git commit
   sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"-${pkgver##*.}\"|g" ./.config
@@ -241,9 +237,6 @@ _package-docs() {
   cp -al Documentation "${pkgdir}/usr/lib/modules/${_kernver}/build"
   find "${pkgdir}" -type f -exec chmod 444 {} \;
   find "${pkgdir}" -type d -exec chmod 755 {} \;
-
-  # remove a file already in linux package
-  rm -f "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
 }
 
 pkgname=("${pkgbase}" "${pkgbase}-headers" "${pkgbase}-docs")
