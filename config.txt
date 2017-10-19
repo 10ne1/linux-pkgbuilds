@@ -1,0 +1,8 @@
+gpu_mem=64
+#avoid_warnings=2
+#hdmi_safe=1
+#hdmi_force_hotplug=1
+dtparam=audio=off
+dtoverlay=iqaudio-dacplus,unmute_amp
+#initramfs initramfs-linux.img followkernel
+kernel=kernel7.img
