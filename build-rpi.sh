@@ -5,6 +5,7 @@ export CROSS_COMPILE=/home/adi/workspace/raspberrypi-tools/arm-bcm2708/gcc-linar
 export INSTALL_MOD_PATH=/home/adi/kernel_install
 export KERNEL=kernel7
 
+mkdir -p $INSTALL_MOD_PATH
 rm -rf $INSTALL_MOD_PATH/*
 
 make -j6 zImage
@@ -12,7 +13,7 @@ make -j6 modules
 make dtbs
 make modules_install
 
-mkdir $INSTALL_MOD_PATH/boot
+mkdir -p $INSTALL_MOD_PATH/boot
 ./scripts/mkknlimg ./arch/arm/boot/zImage $INSTALL_MOD_PATH/boot/$KERNEL.img
 cp ./arch/arm/boot/dts/*.dtb $INSTALL_MOD_PATH/boot/
 cp -r ./arch/arm/boot/dts/overlays $INSTALL_MOD_PATH/boot
